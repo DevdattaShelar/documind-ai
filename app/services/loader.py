@@ -60,10 +60,14 @@ class DocumentLoader:
                 str(path),
                 encoding="utf-8",
             )
-
+        elif suffix == ".md":
+            loader = TextLoader(
+                str(path),
+                encoding="utf-8",
+            )
         else:
-            loader = UnstructuredMarkdownLoader(str(path))
-
+            raise ValueError(f"Unsupported file type: {suffix}")
+        
         documents = loader.load()
 
         # One UUID per original document
