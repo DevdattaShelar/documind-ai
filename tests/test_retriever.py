@@ -2,20 +2,24 @@ from app.services.retriever import Retriever
 
 retriever = Retriever()
 
+question = "What is FastAPI?"
+
 results = retriever.retrieve(
-    "What is FastAPI?",
+    question,
     k=3,
 )
 
-print("\nRetrieved Documents\n")
+print(f"\nQuestion: {question}\n")
 
-for result in results:
+for i, result in enumerate(results, start=1):
 
     print("=" * 80)
 
-    print(f"Score : {result.score:.4f}")
+    print(f"Result #{i}")
 
-    print(f"Source: {result.document.metadata['source']}")
+    print(f"Similarity Score : {result.score:.4f}")
+
+    print(f"Source : {result.document.metadata['source']}")
 
     print()
 

@@ -2,49 +2,79 @@ from typing import List
 
 from langchain_core.documents import Document
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
 
 from app.core.config import settings
+from app.core.embeddings import embedding_model
 from app.core.logging import logger
 
 
+# Singleton Chroma instance
+_vector_store = Chroma(
+    collection_name="documents",
+    persist_directory=settings.CHROMA_PATH,
+    embedding_function=embedding_model,
+)
+
+
 class VectorStoreService:
-    """Handles indexing and retrieval using ChromaDB."""
+    """
+    Handles indexing and retrieval using ChromaDB.
+    """
 
     def __init__(self):
+        self.vector_store = _vector_store
 
-        self.embedding_model = HuggingFaceEmbeddings(
-            model_name=settings.EMBEDDING_MODEL,
-            model_kwargs={"device": "cpu"},
-            encode_kwargs={"normalize_embeddings": True},
-        )
+    def index_documents(
+        self,
+        documents: List[Document],
+    ) -> None:
 
-        self.vector_store = Chroma(
-            collection_name="documents",
-            persist_directory=settings.CHROMA_PATH,
-            embedding_function=self.embedding_model,
-        )
-
-    def index_documents(self, documents: List[Document]) -> None:
         logger.info("Indexing %d chunks...", len(documents))
+
         self.vector_store.add_documents(documents)
-        logger.info("Indexing complete.")
 
-    def similarity_search(self, query: str, k: int = 5):
-        return self.vector_store.similarity_search(query, k=k)
+        logger.info("Indexing completed.")
 
-    def similarity_search_with_score(self, query: str, k: int = 5):
-        return self.vector_store.similarity_search_with_score(query, k=k)
+    def similarity_search(
+        self,
+        query: str,
+        k: int = 5,
+    ) -> List[Document]:
+
+        return self.vector_store.similarity_search(
+            query=query,
+            k=k,
+        )
+
+    def similarity_search_with_score(
+        self,
+        query: str,
+        k: int = 5,
+    ):
+
+        return self.vector_store.similarity_search_with_score(
+            query=query,
+            k=k,
+        )
 
     def count(self) -> int:
+
         return self.vector_store._collection.count()
 
     def reset(self) -> None:
-        logger.warning("Resetting vector collection...")
+
+        logger.warning("Deleting Chroma collection...")
+
         self.vector_store.delete_collection()
 
-        self.vector_store = Chroma(
+        global _vector_store
+
+        _vector_store = Chroma(
             collection_name="documents",
             persist_directory=settings.CHROMA_PATH,
-            embedding_function=self.embedding_model,
+            embedding_function=embedding_model,
         )
+
+        self.vector_store = _vector_store
+
+        logger.info("Collection recreated.")
