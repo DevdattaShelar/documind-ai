@@ -1,11 +1,12 @@
 from pathlib import Path
 
-from app.services.loaders import DocumentLoader
+from app.services.loader import DocumentLoader
 
 loader = DocumentLoader()
 
-docs = loader.load_document(Path("data/sample.txt"))
+documents = loader.load_directory(Path("data"))
 
-print(docs[0].page_content[:300])
+print(f"Loaded {len(documents)} document(s)\n")
 
-print(docs[0].metadata)
+for document in documents:
+    print(document.metadata)
