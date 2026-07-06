@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from app.loaders import DocumentLoader
+from app.services.loaders import DocumentLoader
 
 loader = DocumentLoader()
 
