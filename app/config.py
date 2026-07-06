@@ -17,5 +17,6 @@ class Settings:
     CHUNK_OVERLAP: int = 150
 
     TOP_K: int = 5
+    SIMILARITY_THRESHOLD: float = 0.45
 
 settings = Settings()
