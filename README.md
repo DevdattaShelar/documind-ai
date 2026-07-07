@@ -244,3 +244,33 @@ Add screenshots here after running the application:
 ## 📄 License
 
 This project is released under the MIT License.
+
+## AI_USE_LOG
+## 🤖 AI Usage
+
+AI tools were used as development assistants throughout this project. They supported the implementation process but did not replace understanding, testing, or debugging.
+
+### AI-assisted tasks
+
+* Brainstorming the overall RAG architecture
+* Explaining LangChain, ChromaDB, FastAPI, and Groq concepts
+* Assisting with Python code structure and refactoring
+* Helping debug runtime errors and dependency issues
+* Improving prompts for retrieval and question answering
+* Suggesting code improvements and best practices
+* Assisting in writing project documentation
+
+### Manual work
+
+The following work was completed manually:
+
+* Designing the project architecture
+* Integrating all components into a working application
+* Implementing and testing the document ingestion pipeline
+* Configuring ChromaDB indexing and retrieval
+* Integrating the Groq API
+* Building and testing the FastAPI backend
+* Developing the Streamlit frontend
+* Debugging, validating outputs, and making implementation decisions
+
+AI was used as a coding assistant to improve productivity, while all implementation decisions, integration, testing, and validation were performed by the project author.
