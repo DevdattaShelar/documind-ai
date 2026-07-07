@@ -1,4 +1,7 @@
 .venv/
-.env
 __pycache__/
+.env
 chroma_db/
+.pytest_cache/
+*.pyc
+.vscode/
