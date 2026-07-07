@@ -401,3 +401,14 @@ Suggested screenshots:
 
 ---
 
+# AI Use Log
+
+This project was developed with assistance from AI tools. AI was used to accelerate development, explain concepts, assist with debugging, and improve documentation. All architectural decisions, integration, implementation, testing, and validation were completed by the project author.
+
+| AI Tool          | Approximate Usage | Purpose                                                                                                                                                                                                             |
+| ---------------- | ----------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ChatGPT (OpenAI) | ~50-150 messages | Discussed the RAG architecture, explained LangChain, ChromaDB, FastAPI, and Groq concepts, assisted with debugging, code refactoring, prompt engineering, multilingual support, API design, and README preparation. |
+
+**Statement of honesty**
+
+The AI assistant was used as a software engineering assistant to accelerate development and learning. Every generated suggestion was reviewed, integrated, modified where necessary, and tested before being included in the final implementation. All implementation decisions and final code validation were performed by the project author.
