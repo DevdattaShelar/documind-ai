@@ -14,17 +14,30 @@ class LLMService:
     def generate(
         self,
         prompt: str,
+        system_prompt: str | None = None,
     ) -> str:
+
+        messages = []
+
+        if system_prompt:
+            messages.append(
+                {
+                    "role": "system",
+                    "content": system_prompt,
+                }
+            )
+
+        messages.append(
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        )
 
         response = self.client.chat.completions.create(
             model=settings.LLM_MODEL,
             temperature=0,
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
+            messages=messages,
         )
 
         content = response.choices[0].message.content

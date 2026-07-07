@@ -18,7 +18,7 @@ class Settings:
     # Embeddings
     EMBEDDING_MODEL: str = os.getenv(
         "EMBEDDING_MODEL",
-        "BAAI/bge-small-en-v1.5",
+        "BAAI/bge-m3",
     )
 
     # Vector DB

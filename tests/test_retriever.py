@@ -2,7 +2,7 @@ from app.services.retriever import Retriever
 
 retriever = Retriever()
 
-question = "What is FastAPI?"
+question = "FastAPI क्या है?"
 
 results = retriever.retrieve(
     question,
